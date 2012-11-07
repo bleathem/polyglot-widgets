@@ -10,14 +10,14 @@
     OF ANY KIND, either express or implied. See the License for the specific 
     language governing permissions and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.jboss.as.quickstarts</groupId>
-  <artifactId>jboss-as-helloworld-errai</artifactId>
+  <artifactId>polyglot-widgets</artifactId>
   <version>7.1.2-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>JBoss AS Quickstarts: Errai Hello World</name>
+  <name>Polyglot widgets</name>
 
   <url>http://jboss.org/jbossas</url>
   <licenses>
@@ -31,27 +31,28 @@
   <properties>
 
     <!-- Explicitly declaring the source encoding eliminates the following message: -->
-    <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is 
-      platform dependent! -->
+    <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent! -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-      <!-- JBoss dependency versions -->
-      <version.org.jboss.as.plugins.maven.plugin>7.3.Final</version.org.jboss.as.plugins.maven.plugin>
-      <version.org.jboss.bom>1.0.0.Final</version.org.jboss.bom>
+    <!-- JBoss dependency versions -->
+    <version.org.jboss.as.plugins.maven.plugin>7.3.Final</version.org.jboss.as.plugins.maven.plugin>
+    <version.org.jboss.bom>1.0.0.Final</version.org.jboss.bom>
 
-      <!-- other plugin versions -->
-      <version.clean.plugin>2.4.1</version.clean.plugin>
-      <version.compiler.plugin>2.3.1</version.compiler.plugin>
-      <version.org.codehaus.mojo.gwt.maven.plugin>2.4.0</version.org.codehaus.mojo.gwt.maven.plugin>
-      <version.war.plugin>2.1.1</version.war.plugin>
+    <!-- other plugin versions -->
+    <version.clean.plugin>2.4.1</version.clean.plugin>
+    <version.compiler.plugin>2.3.1</version.compiler.plugin>
+    <version.org.codehaus.mojo.gwt.maven.plugin>2.4.0</version.org.codehaus.mojo.gwt.maven.plugin>
+    <version.war.plugin>2.1.1</version.war.plugin>
 
-      <!-- maven-compiler-plugin -->
-      <maven.compiler.target>1.6</maven.compiler.target>
-      <maven.compiler.source>1.6</maven.compiler.source>
+    <!-- maven-compiler-plugin -->
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.6</maven.compiler.source>
+
+    <errai.version>2.1.0.Final</errai.version>
+    <gwt.version>2.4.0</gwt.version>
+    <javaee.version>3.0.1.Final</javaee.version>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
       <dependency>
         <groupId>org.jboss.bom</groupId>
         <artifactId>jboss-javaee-6.0-with-errai</artifactId>
@@ -59,12 +60,17 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <dependencies>
 
-    <!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->
+    <dependency>
+      <groupId>org.jboss.spec</groupId>
+      <artifactId>jboss-javaee-6.0</artifactId>
+      <version>${javaee.version}</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+
+      <!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->
     <dependency>
       <groupId>javax.enterprise</groupId>
       <artifactId>cdi-api</artifactId>
@@ -115,11 +121,6 @@
       <artifactId>errai-jaxrs-provider</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.jboss.spec.javax.ws.rs</groupId>
-      <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -130,7 +131,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>${version.war.plugin}</version>
         <configuration>
-          <!-- Exclude client only classes from the deployment. As these classes compile down to JavaScript, 
+          <!-- Exclude client only classes from the deployment. As these classes compile down to JavaScript,
             they are not needed at runtime. They would only introduce runtime dependencies to GWT development libraries. -->
           <packagingExcludes>**/client/local/**/*.class</packagingExcludes>
         </configuration>
@@ -165,7 +166,7 @@
           <!-- Configure GWT's development mode (formerly known as hosted mode) to not start the default 
             server (embedded jetty), but to download the HTML host page from the configured runTarget. -->
           <noServer>true</noServer>
-          <runTarget>http://localhost:8080/jboss-as-helloworld-errai/HelloWorldApp.html</runTarget>
+          <runTarget>http://localhost:8080/polyglot-widgets/</runTarget>
         </configuration>
         <executions>
           <execution>
