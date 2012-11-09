@@ -51,15 +51,34 @@
     <errai.version>2.1.0.Final</errai.version>
     <gwt.version>2.4.0</gwt.version>
     <javaee.version>3.0.1.Final</javaee.version>
+    <richfaces.version>4.3.0.20121024-M2</richfaces.version>
+    <richfaces.bootstrap.version>4.3.0-SNAPSHOT</richfaces.bootstrap.version>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
       <dependency>
-        <groupId>org.jboss.bom</groupId>
-        <artifactId>jboss-javaee-6.0-with-errai</artifactId>
-        <version>${version.org.jboss.bom}</version>
+        <groupId>org.jboss.spec</groupId>
+        <artifactId>jboss-javaee-6.0</artifactId>
+        <version>${javaee.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.richfaces</groupId>
+        <artifactId>richfaces-bom</artifactId>
+        <version>${richfaces.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>12.0</version>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
 
     <dependency>
@@ -114,6 +133,21 @@
       <groupId>org.jboss.errai</groupId>
       <artifactId>errai-jaxrs-client</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.richfaces.ui</groupId>
+      <artifactId>richfaces-components-ui</artifactId>
+      <version>${richfaces.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.richfaces.core</groupId>
+      <artifactId>richfaces-core-impl</artifactId>
+      <version>${richfaces.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.richfaces.sandbox.ui.bootstrap</groupId>
+      <artifactId>bootstrap-ui</artifactId>
+      <version>${richfaces.bootstrap.version}</version>
     </dependency>
 
     <dependency>
