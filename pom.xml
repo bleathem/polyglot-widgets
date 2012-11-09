@@ -58,9 +58,9 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.jboss.spec</groupId>
-        <artifactId>jboss-javaee-6.0</artifactId>
-        <version>${javaee.version}</version>
+        <groupId>org.jboss.bom</groupId>
+        <artifactId>jboss-javaee-6.0-with-errai</artifactId>
+        <version>${version.org.jboss.bom}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
