@@ -48,7 +48,7 @@
     <maven.compiler.target>1.6</maven.compiler.target>
     <maven.compiler.source>1.6</maven.compiler.source>
 
-    <errai.version>2.1.0.Final</errai.version>
+    <errai.version>2.1.1.Final</errai.version>
     <gwt.version>2.4.0</gwt.version>
     <javaee.version>3.0.1.Final</javaee.version>
     <richfaces.version>4.3.0.20121024-M2</richfaces.version>
@@ -59,7 +59,7 @@
     <dependencies>
       <dependency>
         <groupId>org.jboss.bom</groupId>
-        <artifactId>jboss-javaee-6.0-with-errai</artifactId>
+        <artifactId>jboss-javaee-6.0-with-tools</artifactId>
         <version>${version.org.jboss.bom}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -108,7 +108,7 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <scope>provided</scope>
+      <version>${gwt.version}</version>
     </dependency>
 
     <!-- Errai -->
@@ -117,24 +117,82 @@
     <dependency>
       <groupId>org.jboss.errai</groupId>
       <artifactId>errai-bus</artifactId>
+        <version>${errai.version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>javax.annotation</groupId>
+                <artifactId>jsr250-api</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
 
     <dependency>
       <groupId>org.jboss.errai</groupId>
       <artifactId>errai-ioc</artifactId>
+        <version>${errai.version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>javax.annotation</groupId>
+                <artifactId>jsr250-api</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
 
     <dependency>
       <groupId>org.jboss.errai</groupId>
       <artifactId>errai-tools</artifactId>
+        <version>${errai.version}</version>
+    </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>org.jboss.errai</groupId>-->
+      <!--<artifactId>errai-jaxrs-client</artifactId>-->
+        <!--<version>${errai.version}</version>-->
+    <!--</dependency>-->
+
+      <!--<dependency>-->
+          <!--<groupId>org.jboss.errai</groupId>-->
+          <!--<artifactId>errai-jaxrs-provider</artifactId>-->
+          <!--<version>${errai.version}</version>-->
+      <!--</dependency>-->
+
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-cdi-client</artifactId>
+        <version>${errai.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.jboss.errai</groupId>
-      <artifactId>errai-jaxrs-client</artifactId>
-      <scope>provided</scope>
+      <artifactId>errai-javax-enterprise</artifactId>
+        <version>${errai.version}</version>
     </dependency>
-    <dependency>
+
+      <dependency>
+          <groupId>org.jboss.errai</groupId>
+          <artifactId>errai-weld-integration</artifactId>
+          <version>${errai.version}</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.jboss.errai</groupId>
+                  <artifactId>errai-cdi-jetty</artifactId>
+              </exclusion>
+              <exclusion>
+                  <groupId>org.jboss.weld.servlet</groupId>
+                  <artifactId>weld-servlet-core</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+
+      <dependency>
       <groupId>org.richfaces.ui</groupId>
       <artifactId>richfaces-components-ui</artifactId>
       <version>${richfaces.version}</version>
@@ -148,11 +206,6 @@
       <groupId>org.richfaces.sandbox.ui.bootstrap</groupId>
       <artifactId>bootstrap-ui</artifactId>
       <version>${richfaces.bootstrap.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jboss.errai</groupId>
-      <artifactId>errai-jaxrs-provider</artifactId>
     </dependency>
 
   </dependencies>

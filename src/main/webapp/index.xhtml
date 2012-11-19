@@ -3,17 +3,33 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://richfaces.org/sandbox/bootstrap">
     <ui:define name="content">
+        <b:navbar>
+            <f:facet name="brand">
+                <h:link styleClass="brand" outcome="/index" value="Polyglot widgets" />
+            </f:facet>
+
+            <h:link outcome="/richfaces-bootstrap" value="RichFaces/JSF example"/>
+            <h:outputLink value="#{request.contextPath}/gwt-bootstrap.html">Errai/GWT example</h:outputLink>
+        </b:navbar>
         <b:gridContainer>
             <b:gridRow>
                 <b:gridColumn span="12">
-                    <b:heroUnit heading="RichFaces Bootstrap Quickstart">
-                        Use this project as a quickstart to "bootstrap" your applications.
+                    <b:heroUnit heading="Components for a polyglot world!">
+                        A demo application demonstrating use of RichFaces standalone widgets to create a "polyglot"
+                        application using both RichFaces/JSF,  Errai/GWT, and HTML/REST.  The significant achievment
+                        here is a single application written in multiple languages/frameworks with a uniform L&amp;F.
                     </b:heroUnit>
-
-                    <b:alert severity="warning">
-                        RichFaces Bootstrap is a Sandbox project, and not yet meant for production use.  API's and component
-                        implementations will change.
-                    </b:alert>
+                </b:gridColumn>
+            </b:gridRow>
+            <b:gridRow>
+                <b:gridColumn span="4">
+                    RichFaces link to a [screenshot]
+                </b:gridColumn>
+                <b:gridColumn span="4">
+                    Errai link to a [screenshot]
+                </b:gridColumn>
+                <b:gridColumn span="4">
+                    HTML5 link to a [screenshot]
                 </b:gridColumn>
             </b:gridRow>
         </b:gridContainer>
