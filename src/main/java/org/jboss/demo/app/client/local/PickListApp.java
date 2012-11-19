@@ -38,16 +38,13 @@ import java.util.List;
 @EntryPoint
 public class PickListApp {
 
-    @Inject
-    private List<String> capitalsList;
-
     @PostConstruct
     public void init() {
         LogUtil.log("****************** this is a test *************");
 
         MessageBuilder.createCall(new RemoteCallback<List<String>>() {
 
-            public void callback(List<String> capitals) {
+            public void callback(List<String> capitalsList) {
                 List<LIElement> sourceList = new ArrayList<LIElement>(capitalsList.size());
                 for (String capital : capitalsList) {
                     LIElement li = Document.get().createLIElement();

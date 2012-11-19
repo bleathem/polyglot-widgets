@@ -13,10 +13,6 @@
 <!-- GWT module definition: the rename-to attribute is used to have a shorter 
     module name that doesn't reflect the actual package structure. -->
 <module rename-to="PickListApp">
-    <inherits name="com.google.gwt.user.User" />
-    <inherits name="com.google.gwt.http.HTTP" />
-    <inherits name="com.google.gwt.json.JSON" />
-
     <inherits name="org.jboss.errai.common.ErraiCommon" />
     <inherits name="org.jboss.errai.bus.ErraiBus" />
     <inherits name="org.jboss.errai.ioc.Container" />

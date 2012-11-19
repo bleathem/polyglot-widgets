@@ -23,6 +23,7 @@ package org.jboss.demo.app.server;
 
 import org.jboss.demo.app.client.shared.CapitalsListService;
 import org.jboss.demo.capitals.Capital;
+import org.jboss.errai.bus.server.annotations.Service;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -36,6 +37,7 @@ import java.util.List;
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 @ApplicationScoped
+@Service
 public class CapitalsListElements implements CapitalsListService {
 
     @Inject
