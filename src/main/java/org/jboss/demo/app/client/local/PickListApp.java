@@ -21,14 +21,14 @@ import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import org.jboss.demo.app.client.shared.CapitalsListService;
-import org.jboss.demo.widgets.PickListWidget;
+import org.jboss.demo.app.client.local.widgets.PickListWidget;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.common.client.util.LogUtil;
+import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +38,7 @@ import java.util.List;
 @EntryPoint
 public class PickListApp {
 
-    @PostConstruct
+    @AfterInitialization
     public void init() {
         LogUtil.log("****************** this is a test *************");
 
