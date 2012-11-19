@@ -21,6 +21,7 @@
  **/
 package org.jboss.demo.app.server;
 
+import org.jboss.demo.app.client.shared.CapitalsListService;
 import org.jboss.demo.capitals.Capital;
 
 import javax.annotation.PostConstruct;

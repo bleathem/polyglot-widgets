@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  **/
-package org.jboss.demo.app.server;
+package org.jboss.demo.app.client.shared;
 
 import org.jboss.errai.bus.server.annotations.Remote;
 

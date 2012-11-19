@@ -20,7 +20,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.RootPanel;
-import org.jboss.demo.app.server.CapitalsListService;
+import org.jboss.demo.app.client.shared.CapitalsListService;
 import org.jboss.demo.widgets.PickListWidget;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
