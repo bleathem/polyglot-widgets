@@ -14,13 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.demo.app;
+package org.jboss.demo.app.client.local;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.RootPanel;
+import org.jboss.demo.app.server.CapitalsListService;
 import org.jboss.demo.widgets.PickListWidget;
+import org.jboss.errai.bus.client.api.RemoteCallback;
+import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.common.client.util.LogUtil;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
@@ -41,19 +44,24 @@ public class PickListApp {
     @PostConstruct
     public void init() {
         LogUtil.log("****************** this is a test *************");
-        List<LIElement> sourceList = new ArrayList<LIElement>(capitalsList.size());
-        for (String capital : capitalsList) {
-            LIElement li = Document.get().createLIElement();
-            li.setInnerText(capital);
-            li.setAttribute("data-key", capital);
-            sourceList.add(li);
-        }
-        List<LIElement> targetList = new ArrayList<LIElement>();
 
+        MessageBuilder.createCall(new RemoteCallback<List<String>>() {
+
+            public void callback(List<String> capitals) {
+                List<LIElement> sourceList = new ArrayList<LIElement>(capitalsList.size());
+                for (String capital : capitalsList) {
+                    LIElement li = Document.get().createLIElement();
+                    li.setInnerText(capital);
+                    li.setAttribute("data-key", capital);
+                    sourceList.add(li);
+                }
+                List<LIElement> targetList = new ArrayList<LIElement>();
+
+                RootPanel.get("myPickList").add(new PickListWidget(sourceList, targetList));
+            }
+
+        }, CapitalsListService.class).getCapitalNames();
         RootPanel.get().add(new InlineHTML("Some text"));
-
-        RootPanel.get("myPickList").add(new PickListWidget(sourceList, targetList));
-
         System.out.println("UI Constructed!");
     }
 

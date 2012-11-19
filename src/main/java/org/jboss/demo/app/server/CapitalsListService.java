@@ -21,36 +21,14 @@
  **/
 package org.jboss.demo.app.server;
 
-import org.jboss.demo.capitals.Capital;
+import org.jboss.errai.bus.server.annotations.Remote;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-@ApplicationScoped
-public class CapitalsListElements implements CapitalsListService {
-
-    @Inject
-    private List<Capital> capitals;
-    private List<String> capitalNames;
-
-    @PostConstruct
-    public void buildList() {
-        capitalNames = new ArrayList<String>(capitals.size());
-        for (Capital capital : capitals) {
-            capitalNames.add(capital.getName());
-        }
-    }
-
-    @Produces
-    public List<String> getCapitalNames() {
-        return capitalNames;
-    }
+@Remote
+public interface CapitalsListService {
+    public List<String> getCapitalNames();
 }
