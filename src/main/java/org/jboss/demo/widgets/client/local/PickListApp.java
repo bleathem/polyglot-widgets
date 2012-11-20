@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.demo.app.client.local;
+package org.jboss.demo.widgets.client.local;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.user.client.ui.RootPanel;
-import org.jboss.demo.app.client.shared.Capital;
-import org.jboss.demo.app.client.shared.CapitalsListService;
+import org.jboss.demo.widgets.client.shared.Capital;
+import org.jboss.demo.widgets.client.shared.CapitalsListService;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.ioc.client.api.AfterInitialization;

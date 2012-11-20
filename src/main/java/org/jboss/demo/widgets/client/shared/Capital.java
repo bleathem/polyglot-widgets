@@ -1,4 +1,4 @@
-package org.jboss.demo.app.client.shared;
+package org.jboss.demo.widgets.client.shared;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;

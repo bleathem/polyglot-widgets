@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  **/
-package org.jboss.demo.app.client.local;
+package org.jboss.demo.widgets.client.local;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;

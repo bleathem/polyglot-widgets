@@ -19,27 +19,16 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  **/
-package org.jboss.demo.app.server;
+package org.jboss.demo.widgets.client.shared;
 
-import org.jboss.demo.app.client.shared.Capital;
-import org.jboss.demo.app.client.shared.CapitalsListService;
-import org.jboss.errai.bus.server.annotations.Service;
+import org.jboss.errai.bus.server.annotations.Remote;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.List;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-@ApplicationScoped
-@Service
-public class CapitalsListElements implements CapitalsListService {
-
-    @Inject
-    private List<Capital> capitals;
-
-    public List<Capital> getCapitals() {
-        return capitals;
-    }
+@Remote
+public interface CapitalsListService {
+    public List<Capital> getCapitals();
 }

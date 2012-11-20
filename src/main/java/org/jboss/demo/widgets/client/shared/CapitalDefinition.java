@@ -19,14 +19,12 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  **/
-package org.jboss.demo.app.client.shared;
+package org.jboss.demo.widgets.client.shared;
 
-import org.jboss.demo.app.client.shared.Capital;
 import org.jboss.errai.marshalling.rebind.api.CustomMapping;
 import org.jboss.errai.marshalling.rebind.api.model.MappingDefinition;
 import org.jboss.errai.marshalling.rebind.api.model.impl.AccessorMapping;
 import org.jboss.errai.marshalling.rebind.api.model.impl.SimpleConstructorMapping;
-import org.jboss.errai.marshalling.rebind.api.model.impl.WriteMapping;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>

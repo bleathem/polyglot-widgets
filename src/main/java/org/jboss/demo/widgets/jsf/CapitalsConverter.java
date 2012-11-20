@@ -19,26 +19,26 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  **/
-package org.jboss.demo.jsf;
+package org.jboss.demo.widgets.jsf;
 
-import org.jboss.demo.app.client.shared.Capital;
-import org.jboss.demo.capitals.CapitalsParser;
+import org.jboss.demo.widgets.client.shared.Capital;
 
 import javax.el.ELContext;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import java.util.List;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 @FacesConverter("CapitalsConverter")
 public class CapitalsConverter implements Converter {
-    private CapitalsParser capitalsParser;
+    private List<Capital> capitals;
 
     public Object getAsObject(FacesContext facesContext, UIComponent component, String s) {
-        for (Capital capital : getCapitalsParser(facesContext).getCapitalsList()) {
+        for (Capital capital : getCapitals(facesContext)) {
             if (capital.getName().equals(s)) {
                 return capital;
             }
@@ -51,11 +51,11 @@ public class CapitalsConverter implements Converter {
         return ((Capital) o).getName();
     }
 
-    private CapitalsParser getCapitalsParser(FacesContext facesContext) {
-        if (capitalsParser == null) {
+    private List<Capital> getCapitals(FacesContext facesContext) {
+        if (capitals == null) {
             ELContext elContext = facesContext.getELContext();
-            capitalsParser = (CapitalsParser) elContext.getELResolver().getValue(elContext, null, "capitalsParser");
+            capitals = (List<Capital>) elContext.getELResolver().getValue(elContext, null, "capitals");
         }
-        return capitalsParser;
+        return capitals;
     }
 }

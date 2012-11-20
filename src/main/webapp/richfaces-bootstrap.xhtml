@@ -28,13 +28,13 @@
                     wraps the standalone "pickList.js" widget as a JSF component.
                     <b:codeblock styleClass="lang-html">
                         <h:outputText escape="true">
-                            &lt;b:pickList value=&quot;#{listSelectBean.selectedCapitals}&quot; sourceCaption=&quot;Available cities&quot; targetCaption=&quot;Selected cities&quot; orderable=&quot;true&quot;&gt;<br/>                                &lt;f:selectItems value=&quot;#{listSelectBean.capitals}&quot; var=&quot;capital&quot; itemValue=&quot;#{capital}&quot; itemLabel=&quot;#{capital.name}&quot; /&gt;<br/>                                &lt;f:converter converterId=&quot;CapitalsConverter&quot; /&gt;<br/>                            &lt;/b:pickList&gt;
+                            sampe code.
                         </h:outputText>
                     </b:codeblock>
                 </b:gridColumn>
                 <b:gridColumn span="7">
-                    <b:pickList value="#{listSelectBean.selectedCapitals}" sourceCaption="Available cities" targetCaption="Selected cities" orderable="true">
-                        <f:selectItems value="#{listSelectBean.capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
+                    <b:pickList id="picklist" value="#{capitalsBean.selectedCapitals}" sourceCaption="Available cities" targetCaption="Selected cities" orderable="true">
+                        <f:selectItems value="#{capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
                         <f:converter converterId="CapitalsConverter" />
                     </b:pickList>
                 </b:gridColumn>

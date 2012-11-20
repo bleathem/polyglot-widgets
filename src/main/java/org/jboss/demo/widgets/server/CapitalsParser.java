@@ -1,12 +1,15 @@
-package org.jboss.demo.capitals;
+package org.jboss.demo.widgets.server;
 
-import org.jboss.demo.app.client.shared.Capital;
+import org.jboss.demo.widgets.client.shared.Capital;
+import org.jboss.demo.widgets.client.shared.CapitalsListService;
+import org.jboss.errai.bus.server.annotations.Service;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.faces.FacesException;
+import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlElement;
@@ -15,7 +18,8 @@ import java.net.URL;
 import java.util.List;
 
 @ApplicationScoped
-public class CapitalsParser {
+@Service
+public class CapitalsParser implements CapitalsListService {
     private List<Capital> capitalsList;
 
     @XmlRootElement(name = "capitals")
@@ -48,8 +52,9 @@ public class CapitalsParser {
     }
 
     @Produces
+    @Named
     @Dependent
-    public List<Capital> getCapitalsList() {
+    public List<Capital> getCapitals() {
         return capitalsList;
     }
 }
