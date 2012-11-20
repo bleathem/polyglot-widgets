@@ -1,5 +1,7 @@
 package org.jboss.demo.capitals;
 
+import org.jboss.demo.app.client.shared.Capital;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

@@ -21,7 +21,7 @@
  **/
 package org.jboss.demo.jsf;
 
-import org.jboss.demo.capitals.Capital;
+import org.jboss.demo.app.client.shared.Capital;
 import org.jboss.demo.capitals.CapitalsParser;
 
 import javax.el.ELContext;

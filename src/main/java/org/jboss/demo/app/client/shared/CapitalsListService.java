@@ -30,5 +30,5 @@ import java.util.List;
  */
 @Remote
 public interface CapitalsListService {
-    public List<String> getCapitalNames();
+    public List<Capital> getCapitals();
 }

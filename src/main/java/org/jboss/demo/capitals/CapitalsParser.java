@@ -1,11 +1,12 @@
 package org.jboss.demo.capitals;
 
+import org.jboss.demo.app.client.shared.Capital;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.faces.FacesException;
-import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlElement;
@@ -47,7 +48,7 @@ public class CapitalsParser {
     }
 
     @Produces
-    @ApplicationScoped
+    @Dependent
     public List<Capital> getCapitalsList() {
         return capitalsList;
     }

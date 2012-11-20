@@ -18,12 +18,11 @@ package org.jboss.demo.app.client.local;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
-import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.RootPanel;
+import org.jboss.demo.app.client.shared.Capital;
 import org.jboss.demo.app.client.shared.CapitalsListService;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
-import org.jboss.errai.common.client.util.LogUtil;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
@@ -38,15 +37,15 @@ public class PickListApp {
 
     @AfterInitialization
     public void init() {
-        MessageBuilder.createCall(new RemoteCallback<List<String>>() {
+        MessageBuilder.createCall(new RemoteCallback<List<Capital>>() {
 
-            public void callback(List<String> capitalsList) {
-                List<LIElement> sourceList = new ArrayList<LIElement>(capitalsList.size());
+            public void callback(List<Capital> capitals) {
+                List<LIElement> sourceList = new ArrayList<LIElement>(capitals.size());
                 Document document = Document.get();
-                for (String capital : capitalsList) {
+                for (Capital capital : capitals) {
                     LIElement li = document.createLIElement();
-                    li.setInnerText(capital);
-                    li.setAttribute("data-key", capital);
+                    li.setInnerText(capital.getName());
+                    li.setAttribute("data-key", capital.getName());
                     sourceList.add(li);
                 }
                 List<LIElement> targetList = new ArrayList<LIElement>();
@@ -54,6 +53,6 @@ public class PickListApp {
                 RootPanel.get("myPickList").add(new PickListWidget(sourceList, targetList));
             }
 
-        }, CapitalsListService.class).getCapitalNames();
+        }, CapitalsListService.class).getCapitals();
     }
 }

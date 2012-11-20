@@ -1,4 +1,4 @@
-package org.jboss.demo.capitals;
+package org.jboss.demo.app.client.shared;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
@@ -14,6 +14,12 @@ public class Capital implements Serializable {
     private String timeZone;
 
     public Capital() {
+    }
+
+    public Capital(String name, String state, String timeZone) {
+        this.name = name;
+        this.state = state;
+        this.timeZone = timeZone;
     }
 
     @XmlElement
