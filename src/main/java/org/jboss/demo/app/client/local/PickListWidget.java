@@ -19,16 +19,12 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  **/
-package org.jboss.demo.app.client.local.widgets;
+package org.jboss.demo.app.client.local;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.ScriptInjector;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
-import com.google.gwt.dom.client.OListElement;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.List;
@@ -36,17 +32,24 @@ import java.util.List;
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-public class PickListWidget extends Composite {
+public class PickListWidget extends Widget {
 
-    interface MyUiBinder extends UiBinder<Panel, PickListWidget> {}
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
-
-    @UiField Panel root;
-    @UiField OListElement sourceList;
-    @UiField OListElement targetList;
 
     public PickListWidget(List<LIElement> sourceItems, List<LIElement> targetItems) {
-        initWidget(uiBinder.createAndBindUi(this));
+        super();
+        Element panel = DOM.createDiv();
+        String uniqueId = Document.get().createUniqueId();
+        panel.setId(uniqueId);
+        setElement(panel);
+
+        Element sourceList = DOM.createElement("ol");
+        sourceList.setClassName("source");
+        Element targetList = DOM.createElement("ol");
+        targetList.setClassName("target");
+
+        panel.appendChild(sourceList);
+        panel.appendChild(targetList);
+
         for (LIElement item : sourceItems) {
             sourceList.appendChild(item);
         }
@@ -56,13 +59,14 @@ public class PickListWidget extends Composite {
     }
 
     @Override
-    protected void initWidget(Widget widget) {
-        super.initWidget(widget);
+    protected void onLoad() {
         String id = this.getElement().getId();
-        String scriptBody = "jQuery(function () {\n" +
-                "                var $pickList = $(document.getElementById('" + id + "'));\n" +
-                "                $pickList.pickList();\n" +
-                "            });";
-        ScriptInjector.fromString(scriptBody).inject();
+        initPickList(id);
+        super.onLoad();
     }
+
+    private static native void initPickList(String id) /*-{
+        $wnd.jQuery("#" + id).pickList();
+    }-*/;
+
 }

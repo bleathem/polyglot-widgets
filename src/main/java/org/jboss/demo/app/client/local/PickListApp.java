@@ -21,14 +21,12 @@ import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import org.jboss.demo.app.client.shared.CapitalsListService;
-import org.jboss.demo.app.client.local.widgets.PickListWidget;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.common.client.util.LogUtil;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +38,13 @@ public class PickListApp {
 
     @AfterInitialization
     public void init() {
-        LogUtil.log("****************** this is a test *************");
-
         MessageBuilder.createCall(new RemoteCallback<List<String>>() {
 
             public void callback(List<String> capitalsList) {
                 List<LIElement> sourceList = new ArrayList<LIElement>(capitalsList.size());
+                Document document = Document.get();
                 for (String capital : capitalsList) {
-                    LIElement li = Document.get().createLIElement();
+                    LIElement li = document.createLIElement();
                     li.setInnerText(capital);
                     li.setAttribute("data-key", capital);
                     sourceList.add(li);
@@ -58,8 +55,5 @@ public class PickListApp {
             }
 
         }, CapitalsListService.class).getCapitalNames();
-        RootPanel.get().add(new InlineHTML("Some text"));
-        System.out.println("UI Constructed!");
     }
-
 }
