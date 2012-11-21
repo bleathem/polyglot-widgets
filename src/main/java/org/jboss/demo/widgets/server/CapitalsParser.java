@@ -15,6 +15,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 @ApplicationScoped
@@ -44,7 +45,7 @@ public class CapitalsParser {
         try {
             context = JAXBContext.newInstance(CapitalsHolder.class);
             CapitalsHolder capitalsHolder = (CapitalsHolder) context.createUnmarshaller().unmarshal(resource);
-            capitalsList = capitalsHolder.getCapitals();
+            capitalsList = Collections.unmodifiableList(capitalsHolder.getCapitals());
         } catch (JAXBException e) {
             throw new FacesException(e.getMessage(), e);
         }

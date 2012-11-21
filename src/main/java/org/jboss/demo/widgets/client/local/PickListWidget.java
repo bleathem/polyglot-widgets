@@ -23,6 +23,8 @@ package org.jboss.demo.widgets.client.local;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
+import com.google.gwt.dom.client.Node;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
@@ -33,28 +35,47 @@ import java.util.List;
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 public class PickListWidget extends Widget {
+    private final List<LIElement> allItems;
+    private final Element sourceList;
+    private final Element targetList;
 
-
-    public PickListWidget(List<LIElement> sourceItems, List<LIElement> targetItems) {
+    public PickListWidget(List<LIElement> allItems) {
         super();
+        this.allItems = allItems;
         Element panel = DOM.createDiv();
         String uniqueId = Document.get().createUniqueId();
         panel.setId(uniqueId);
         setElement(panel);
 
-        Element sourceList = DOM.createElement("ol");
+        sourceList = DOM.createElement("ol");
         sourceList.setClassName("source");
-        Element targetList = DOM.createElement("ol");
+        targetList = DOM.createElement("ol");
         targetList.setClassName("target");
 
         panel.appendChild(sourceList);
         panel.appendChild(targetList);
 
-        for (LIElement item : sourceItems) {
+        for (LIElement item : allItems) {
             sourceList.appendChild(item);
         }
-        for (LIElement item : targetItems) {
-            targetList.appendChild(item);
+    }
+
+    public void selectItems(List<LIElement> selectedItems) {
+        for (LIElement selectedItem : selectedItems) {
+            NodeList nodeList = sourceList.getChildNodes();
+            for (int i = 0; i <= nodeList.getLength(); i++ ) {
+                Node node = nodeList.getItem(i);
+                if (node instanceof LIElement) {
+                    LIElement li = (LIElement) node;
+                    String nodeKey = li.getAttribute("data-key");
+                    String selectedKey = selectedItem.getAttribute("data-key");
+                    if (nodeKey.equals(selectedKey)) {
+                        sourceList.removeChild(node);
+                        targetList.appendChild(selectedItem);
+                    }
+                }
+            }
+
         }
     }
 

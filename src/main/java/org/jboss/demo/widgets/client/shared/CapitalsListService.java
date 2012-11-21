@@ -31,5 +31,6 @@ import java.util.Map;
  */
 @Remote
 public interface CapitalsListService {
-    public CapitalSelections buildSelectionLists();
+    public List<Capital> getCapitals();
+    public List<Capital> getSelectedCapitals();
 }

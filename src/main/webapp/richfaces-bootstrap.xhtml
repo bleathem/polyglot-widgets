@@ -34,8 +34,6 @@
                 </b:gridColumn>
                 <b:gridColumn span="7">
                     <h:form id="form">
-                        <h:inputText id="testExec" value="#{capitalsBean.test}"/>
-                        <h:outputText id="testRend" value="#{capitalsBean.test}"/>
                         <b:pickList id="picklist" value="#{capitalsBean.selectedCapitals}" sourceCaption="Available cities" targetCaption="Selected cities" orderable="true">
                             <f:selectItems value="#{capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
                             <f:converter binding="#{capitalsConverter}" />
