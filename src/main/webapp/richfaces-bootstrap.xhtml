@@ -33,10 +33,15 @@
                     </b:codeblock>
                 </b:gridColumn>
                 <b:gridColumn span="7">
-                    <b:pickList id="picklist" value="#{capitalsBean.selectedCapitals}" sourceCaption="Available cities" targetCaption="Selected cities" orderable="true">
-                        <f:selectItems value="#{capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
-                        <f:converter converterId="CapitalsConverter" />
-                    </b:pickList>
+                    <h:form id="form">
+                        <h:inputText id="testExec" value="#{capitalsBean.test}"/>
+                        <h:outputText id="testRend" value="#{capitalsBean.test}"/>
+                        <b:pickList id="picklist" value="#{capitalsBean.selectedCapitals}" sourceCaption="Available cities" targetCaption="Selected cities" orderable="true">
+                            <f:selectItems value="#{capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
+                            <f:converter binding="#{capitalsConverter}" />
+                        </b:pickList>
+                        <a4j:commandButton value="Submit" execute="testExec picklist" render="picklist testRend" />
+                    </h:form>
                 </b:gridColumn>
             </b:gridRow>
         </b:gridContainer>

@@ -20,6 +20,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.user.client.ui.RootPanel;
 import org.jboss.demo.widgets.client.shared.Capital;
+import org.jboss.demo.widgets.client.shared.CapitalSelections;
 import org.jboss.demo.widgets.client.shared.CapitalsListService;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
@@ -28,6 +29,7 @@ import org.jboss.errai.ioc.client.api.EntryPoint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
@@ -37,22 +39,31 @@ public class PickListApp {
 
     @AfterInitialization
     public void init() {
-        MessageBuilder.createCall(new RemoteCallback<List<Capital>>() {
-
-            public void callback(List<Capital> capitals) {
-                List<LIElement> sourceList = new ArrayList<LIElement>(capitals.size());
-                Document document = Document.get();
-                for (Capital capital : capitals) {
-                    LIElement li = document.createLIElement();
-                    li.setInnerText(capital.getName());
-                    li.setAttribute("data-key", capital.getName());
-                    sourceList.add(li);
-                }
-                List<LIElement> targetList = new ArrayList<LIElement>();
-
-                RootPanel.get("myPickList").add(new PickListWidget(sourceList, targetList));
+        MessageBuilder.createCall(new RemoteCallback<CapitalSelections>() {
+            public void callback(CapitalSelections capitalSelections) {
+                processCapitalsSelections(capitalSelections);
             }
+        }, CapitalsListService.class).buildSelectionLists();
+    }
 
-        }, CapitalsListService.class).getCapitals();
+    private void processCapitalsSelections(CapitalSelections capitalSelections) {
+        Document document = Document.get();
+
+        List<LIElement> sourceList = new ArrayList<LIElement>();
+        for (Capital capital : capitalSelections.unselected) {
+            LIElement li = document.createLIElement();
+            li.setInnerText(capital.getName());
+            li.setAttribute("data-key", capital.getName());
+            sourceList.add(li);
+        }
+        List<LIElement> targetList = new ArrayList<LIElement>();
+        for (Capital capital : capitalSelections.selected) {
+            LIElement li = document.createLIElement();
+            li.setInnerText(capital.getName());
+            li.setAttribute("data-key", capital.getName());
+            targetList.add(li);
+        }
+
+        RootPanel.get("myPickList").add(new PickListWidget(sourceList, targetList));
     }
 }

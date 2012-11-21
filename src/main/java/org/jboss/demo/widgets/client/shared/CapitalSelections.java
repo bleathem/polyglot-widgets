@@ -21,15 +21,31 @@
  **/
 package org.jboss.demo.widgets.client.shared;
 
-import org.jboss.errai.bus.server.annotations.Remote;
+import org.jboss.errai.common.client.api.annotations.Portable;
+import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-@Remote
-public interface CapitalsListService {
-    public CapitalSelections buildSelectionLists();
+@Portable
+public class CapitalSelections {
+    public final List<Capital> selected;
+    public final List<Capital> unselected;
+
+    public CapitalSelections(
+            @MapsTo("selected") List<Capital> selected,
+            @MapsTo("unselected") List<Capital> unselected) {
+        this.selected = selected;
+        this.unselected = unselected;
+    }
+
+    public List<Capital> getSelected() {
+        return selected;
+    }
+
+    public List<Capital> getUnselected() {
+        return unselected;
+    }
 }

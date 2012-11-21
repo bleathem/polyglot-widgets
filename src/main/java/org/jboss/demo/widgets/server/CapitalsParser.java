@@ -18,8 +18,7 @@ import java.net.URL;
 import java.util.List;
 
 @ApplicationScoped
-@Service
-public class CapitalsParser implements CapitalsListService {
+public class CapitalsParser {
     private List<Capital> capitalsList;
 
     @XmlRootElement(name = "capitals")
@@ -53,7 +52,6 @@ public class CapitalsParser implements CapitalsListService {
 
     @Produces
     @Named
-    @Dependent
     public List<Capital> getCapitals() {
         return capitalsList;
     }

@@ -28,17 +28,20 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-@FacesConverter("CapitalsConverter")
+@Named
 public class CapitalsConverter implements Converter {
+    @Inject
     private List<Capital> capitals;
 
     public Object getAsObject(FacesContext facesContext, UIComponent component, String s) {
-        for (Capital capital : getCapitals(facesContext)) {
+        for (Capital capital : capitals) {
             if (capital.getName().equals(s)) {
                 return capital;
             }
@@ -51,11 +54,4 @@ public class CapitalsConverter implements Converter {
         return ((Capital) o).getName();
     }
 
-    private List<Capital> getCapitals(FacesContext facesContext) {
-        if (capitals == null) {
-            ELContext elContext = facesContext.getELContext();
-            capitals = (List<Capital>) elContext.getELResolver().getValue(elContext, null, "capitals");
-        }
-        return capitals;
-    }
 }
