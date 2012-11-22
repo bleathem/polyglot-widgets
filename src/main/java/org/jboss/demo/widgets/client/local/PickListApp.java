@@ -45,6 +45,8 @@ public class PickListApp {
         pickList = new PickListWidget();
 
         Button button = new Button("Submit");
+        button.removeStyleName("gwt-button");
+        button.getElement().addClassName("button");
         button.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {

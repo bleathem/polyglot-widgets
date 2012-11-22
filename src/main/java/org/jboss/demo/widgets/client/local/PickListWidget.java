@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
 import org.jboss.demo.widgets.client.shared.Capital;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -66,7 +67,9 @@ public class PickListWidget extends Widget {
         for (Capital capital : capitals) {
             LIElement li = document.createLIElement();
             li.setInnerText(capital.getName());
+            // "data-key" is used by the jQuery plugin to uniquely identify the list elements
             li.setAttribute("data-key", capital.getName());
+            // use JSNI to store the item object in the "data-object" attribute of the list element
             setCapital(li, capital);
             if (selectedCapitals.contains(capital)) {
                 targetList.appendChild(li);
@@ -74,38 +77,48 @@ public class PickListWidget extends Widget {
                 sourceList.appendChild(li);
             }
         }
-
+        // We don't initialize the jQuery plugin until the list elements are in place
         initPlugin();
     }
 
     public void updateSelectedCapitals(List<Capital> selectedCapitals) {
         List<LIElement> liElements = new ArrayList<LIElement>();
-        for (int i = 0; i < sourceList.getChildCount(); i++ ) {
-            Node node = sourceList.getChild(i);
-            if (node instanceof LIElement) {
-                liElements.add((LIElement) node);
-            }
-        }
+        // retrieve the list elements from the targetList
         for (int i = 0; i < targetList.getChildCount(); i++ ) {
             Node node = targetList.getChild(i);
             if (node instanceof LIElement) {
                 liElements.add((LIElement) node);
             }
         }
+        // retrieve the list elements from the sourceList
+        for (int i = 0; i < sourceList.getChildCount(); i++ ) {
+            Node node = sourceList.getChild(i);
+            if (node instanceof LIElement) {
+                liElements.add((LIElement) node);
+            }
+        }
         clearChildren(sourceList);
         clearChildren(targetList);
+        // put the selected list elements back in the targetList in the selected order
+        Iterator<LIElement> iterator = liElements.iterator();
         for (Capital capital : selectedCapitals) {
-            for (LIElement li : liElements) {
+            while (iterator.hasNext()) {
+                LIElement li = iterator.next();
                 if (capital.equals(getCapital(li))) {
                     targetList.appendChild(li);
+                    iterator.remove();
+                    break;
                 }
             }
         }
+        // put the non-selected list elements back in the sourceList in the original order
         for (Capital capital : capitals) {
             if (! selectedCapitals.contains(capital)) {
-                for (LIElement li : liElements) {
+                while (iterator.hasNext()) {
+                    LIElement li = iterator.next();
                     if (capital.equals(getCapital(li))) {
                         sourceList.appendChild(li);
+                        iterator.remove();
                         break;
                     }
                 }
@@ -137,12 +150,6 @@ public class PickListWidget extends Widget {
         return element;
     }
 
-    @Override
-    protected void onLoad() {
-//        initPlugin();
-        super.onLoad();
-    }
-
     private void initPlugin() {
         String id = this.getElement().getId();
         initPickList(id);
@@ -153,11 +160,11 @@ public class PickListWidget extends Widget {
     }-*/;
 
     private native void setCapital(LIElement li, Capital capital) /*-{
-        $wnd.jQuery(li).data('domainobject', capital);
+        $wnd.jQuery(li).data('object', capital);
     }-*/;
 
     private native Capital getCapital(LIElement li) /*-{
-        return $wnd.jQuery(li).data('domainobject');
+        return $wnd.jQuery(li).data('object');
     }-*/;
 
 

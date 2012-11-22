@@ -18,6 +18,11 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A CDI Bean that parses the Capitals XML data, and exposes the Capitals list for CDI Injection
+ *
+ * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
+ */
 @ApplicationScoped
 public class CapitalsParser {
     private List<Capital> capitalsList;

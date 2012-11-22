@@ -6,6 +6,11 @@ import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
+/**
+ * A POJO representing a state capital.
+ *
+ * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
+ */
 @Portable
 public class Capital implements Serializable {
     /**

@@ -17,28 +17,30 @@
         <b:gridContainer>
             <b:gridRow>
                 <b:gridColumn span="12">
-                    <b:heroUnit heading="Components for a polyglot world!">
-                        RichFaces standalone javascript widgets can be used with any web framework
+                    <b:heroUnit heading="Components for JSF/RichFaces">
+                        The RichFaces standalone javascript widgets used with JSF/RichFaces
                     </b:heroUnit>
                 </b:gridColumn>
             </b:gridRow>
             <b:gridRow>
                 <b:gridColumn span="5">
-                    Here we have a JSF Facelet snippet built using the RichFaces "pickList" Bootstrap component that
-                    wraps the standalone "pickList.js" widget as a JSF component.
-                    <b:codeblock styleClass="lang-html">
-                        <h:outputText escape="true">
-                            sampe code.
-                        </h:outputText>
-                    </b:codeblock>
+                    <p>
+                        Here we have a JSF Component built using the RichFaces Bootstrap &quot;pickList&quot; javascript
+                        widget that, used to select/sort items from a list.
+                    </p>
+                    <p>
+                        The RichFaces Bootstrap Sandbox project wraps the jQuery plugin as a JSF component, and is used
+                        in your JSF applications via the facelet syntax:
+                    </p>
+                    <b:codeblock styleClass="lang-html">&lt;b:pickList id=&quot;picklist&quot; value=&quot;\#{capitalsBean.selectedCapitals}&quot; orderable=&quot;true&quot;&gt;<br/>    &lt;f:selectItems value=&quot;\#{capitals}&quot; var=&quot;capital&quot; itemValue=&quot;\#{capital}&quot; itemLabel=&quot;\#{capital.name}&quot; /&gt;<br/>    &lt;f:converter binding=&quot;\#{capitalsConverter}&quot; /&gt;<br/>&lt;/b:pickList&gt;</b:codeblock>
                 </b:gridColumn>
                 <b:gridColumn span="7">
                     <h:form id="form">
-                        <b:pickList id="picklist" value="#{capitalsBean.selectedCapitals}" sourceCaption="Available cities" targetCaption="Selected cities" orderable="true">
+                        <b:pickList id="picklist" value="#{capitalsBean.selectedCapitals}" orderable="true">
                             <f:selectItems value="#{capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
                             <f:converter binding="#{capitalsConverter}" />
                         </b:pickList>
-                        <a4j:commandButton value="Submit" execute="testExec picklist" render="picklist testRend" />
+                        <b:commandButton value="Submit" execute="testExec picklist" render="picklist testRend" />
                         <a4j:push address="capitalsSelected">
                             <a4j:ajax render="picklist" event="dataavailable" />
                         </a4j:push>

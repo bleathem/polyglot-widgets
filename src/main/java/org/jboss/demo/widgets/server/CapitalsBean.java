@@ -17,6 +17,11 @@ import java.util.List;
 @Named
 @SessionScoped
 @Service
+/**
+ * The CDI bean that holds the list of selected Capitals in the user session.
+ *
+ * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
+ */
 public class CapitalsBean  implements CapitalsListService, Serializable {
     private static final long serialVersionUID = -1509108399715814302L;
     @Inject

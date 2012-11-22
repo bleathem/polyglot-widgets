@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The interface of the Errai RPCservice used to retrieve the list of capitals from the server.
+ *
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 @Remote

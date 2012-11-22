@@ -33,6 +33,8 @@ import javax.inject.Named;
 import java.util.List;
 
 /**
+ * The JSF converter for the Capital object
+ *
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 @Named

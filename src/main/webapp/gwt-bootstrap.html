@@ -59,18 +59,26 @@ limitations under the License.
     <div class="row">
         <div class="span12">
             <div class="hero-unit">
-                <h1>Components for a polyglot world!</h1>
+                <h1>Components for GWT/Errai!</h1>
 
-                <p>Errai/GWT standalone javascript widgets can be used with any web framework</p>
+                <p>The RichFaces standalone javascript widgets used with GWT/Errai</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="span5">
-            Here we have a GWT Widget built using the RichFaces &quot;pickList&quot; Bootstrap javascript widget that.
-                    <pre class="prettyprint linenums lang-html">
-                        Some sample code
-                    </pre>
+            <p>
+                Here we have a GWT Widget built using the standalone RichFaces Bootstrap &quot;pickList&quot; javascript
+                widget, used to select/sort items from a list.
+            </p>
+            <p>
+                A GWT widget was created to interact with the pickList jQuery plugin.  Invoking the GWT widget via Java
+                code is as simple as:
+            </p>
+            <pre class="prettyprint linenums lang-html">pickList = new PickListWidget();
+pickList.initCapitals(capitals, selectedCapitals);
+RootPanel.get("myPickList").add(pickList);
+            </pre>
         </div>
         <div class="span7">
             <div id="myPickList"></div>

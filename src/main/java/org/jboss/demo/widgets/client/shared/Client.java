@@ -26,6 +26,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
+ * A qualifier used to identify CDI events originating on the client
+ *
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 @Qualifier

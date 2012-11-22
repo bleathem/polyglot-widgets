@@ -27,6 +27,8 @@ import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
 import java.util.List;
 
 /**
+ * A POJO used as for the CDI events that synchronize the JSF and GWT clients
+ *
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 @Portable
