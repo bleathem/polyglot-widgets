@@ -21,25 +21,23 @@
  **/
 package org.jboss.demo.widgets.client.shared;
 
-import org.jboss.errai.marshalling.rebind.api.CustomMapping;
-import org.jboss.errai.marshalling.rebind.api.model.MappingDefinition;
-import org.jboss.errai.marshalling.rebind.api.model.impl.AccessorMapping;
-import org.jboss.errai.marshalling.rebind.api.model.impl.SimpleConstructorMapping;
+import org.jboss.errai.common.client.api.annotations.Portable;
+import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
+
+import java.util.List;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-@CustomMapping
-public class CapitalDefinition extends MappingDefinition {
-    public CapitalDefinition() {
-        super(Capital.class);
-        SimpleConstructorMapping constructorMapping = new SimpleConstructorMapping();
-        constructorMapping.mapParmToIndex("name", 0, String.class);
-        constructorMapping.mapParmToIndex("state", 1, String.class);
-        constructorMapping.mapParmToIndex("timeZone", 2, String.class);
-        setInstantiationMapping(constructorMapping);
-        addMemberMapping(new AccessorMapping("name", String.class, "setName", "getName"));
-        addMemberMapping(new AccessorMapping("state", String.class, "setState", "getState"));
-        addMemberMapping(new AccessorMapping("timeZone", String.class, "setTimeZone", "getTimeZone"));
+@Portable
+public class CapitalsSelected {
+    private final List<Capital> selectedCapitals;
+
+    public CapitalsSelected(@MapsTo("selectedCapitals") List<Capital> selectedCapitals) {
+        this.selectedCapitals = selectedCapitals;
+    }
+
+    public List<Capital> getSelectedCapitals() {
+        return selectedCapitals;
     }
 }

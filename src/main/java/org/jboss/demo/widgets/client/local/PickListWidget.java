@@ -28,20 +28,21 @@ import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
+import org.jboss.demo.widgets.client.shared.Capital;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 public class PickListWidget extends Widget {
-    private final List<LIElement> allItems;
+    private List<Capital> capitals;
     private final Element sourceList;
     private final Element targetList;
 
-    public PickListWidget(List<LIElement> allItems) {
+    public PickListWidget() {
         super();
-        this.allItems = allItems;
         Element panel = DOM.createDiv();
         String uniqueId = Document.get().createUniqueId();
         panel.setId(uniqueId);
@@ -54,40 +55,84 @@ public class PickListWidget extends Widget {
 
         panel.appendChild(sourceList);
         panel.appendChild(targetList);
-
-        for (LIElement item : allItems) {
-            sourceList.appendChild(item);
-        }
     }
 
-    public void selectItems(List<LIElement> selectedItems) {
-        for (LIElement selectedItem : selectedItems) {
-            NodeList nodeList = sourceList.getChildNodes();
-            for (int i = 0; i <= nodeList.getLength(); i++ ) {
-                Node node = nodeList.getItem(i);
-                if (node instanceof LIElement) {
-                    LIElement li = (LIElement) node;
-                    String nodeKey = li.getAttribute("data-key");
-                    String selectedKey = selectedItem.getAttribute("data-key");
-                    if (nodeKey.equals(selectedKey)) {
-                        sourceList.removeChild(node);
-                        targetList.appendChild(selectedItem);
-                    }
+    public PickListWidget initCapitals(List<Capital> capitals, List<Capital> selectedCapitals) {
+        this.capitals = capitals;
+        parseCapitals(selectedCapitals);
+        initPlugin();
+        return this;
+    }
+
+    public PickListWidget parseCapitals(List<Capital> selectedCapitals) {
+        clearChildren(sourceList);
+        clearChildren(targetList);
+
+        Document document = Document.get();
+        for (Capital capital : capitals) {
+            LIElement li = document.createLIElement();
+            li.setInnerText(capital.getName());
+            li.setAttribute("data-key", capital.getName());
+            setCapital(li, capital);
+            if (selectedCapitals.contains(capital)) {
+                targetList.appendChild(li);
+            } else {
+                sourceList.appendChild(li);
+            }
+        }
+        return this;
+    }
+
+    public PickListWidget updateSelectedCapitals(List<Capital> selectedCapitals) {
+        return this; //parseCapitals(selectedCapitals);
+    }
+
+    public List<Capital> getSelectedCapitals() {
+        List<Capital> selectedCapitals = new ArrayList<Capital>();
+        for (int i = 0; i < targetList.getChildCount(); i++ ) {
+            Node node = targetList.getChild(i);
+            if (node instanceof LIElement) {
+                LIElement li = (LIElement) node;
+                Capital capital = getCapital(li);
+                if (capital != null) {
+                    selectedCapitals.add(capital);
                 }
             }
-
         }
+        return selectedCapitals;
+    }
+
+    private Element clearChildren(Element element) {
+        if (element.hasChildNodes()) {
+            while ( element.hasChildNodes()) {
+                element.removeChild(element.getLastChild());
+            }
+        }
+        return element;
     }
 
     @Override
     protected void onLoad() {
+//        initPlugin();
+        super.onLoad();
+    }
+
+    private void initPlugin() {
         String id = this.getElement().getId();
         initPickList(id);
-        super.onLoad();
     }
 
     private static native void initPickList(String id) /*-{
         $wnd.jQuery("#" + id).pickList();
     }-*/;
+
+    private native void setCapital(LIElement li, Capital capital) /*-{
+        $wnd.jQuery(li).data('domainobject', capital);
+    }-*/;
+
+    private native Capital getCapital(LIElement li) /*-{
+        return $wnd.jQuery(li).data('domainobject');
+    }-*/;
+
 
 }

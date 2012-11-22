@@ -16,17 +16,21 @@
  */
 package org.jboss.demo.widgets.client.local;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.LIElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import org.jboss.demo.widgets.client.shared.Capital;
 import org.jboss.demo.widgets.client.shared.CapitalsListService;
+import org.jboss.demo.widgets.client.shared.CapitalsSelected;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
-import java.util.ArrayList;
+import javax.enterprise.event.Event;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -34,16 +38,33 @@ import java.util.List;
  */
 @EntryPoint
 public class PickListApp {
+    private PickListWidget pickList;
+
+    @Inject
+    private Event<CapitalsSelected> event;
+
+    public PickListApp() {
+        pickList = new PickListWidget();
+
+        Button button = new Button("Submit");
+        button.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                submit();
+            }
+        });
+
+        RootPanel.get("myPickList").add(pickList);
+        RootPanel.get("myPickList").add(button);
+    }
 
     @AfterInitialization
-    public void init() {
+    public void remoteCall() {
         MessageBuilder.createCall(new RemoteCallback<List<Capital>>() {
-            public void callback(List<Capital> capitals) {
-                final PickListWidget pickList = new PickListWidget(buildList(capitals));
+            public void callback(final List<Capital> capitals) {
                 MessageBuilder.createCall(new RemoteCallback<List<Capital>>() {
-                    public void callback(List<Capital> selectedCapitals) {
-                        pickList.selectItems(buildList(selectedCapitals));
-                        RootPanel.get("myPickList").add(pickList);
+                    public void callback(final List<Capital> selectedCapitals) {
+                        pickList.initCapitals(capitals, selectedCapitals);
                     }
                 }, CapitalsListService.class).getSelectedCapitals();
 
@@ -51,16 +72,13 @@ public class PickListApp {
         }, CapitalsListService.class).getCapitals();
     }
 
-    private List<LIElement> buildList(List<Capital> capitals) {
-        Document document = Document.get();
+    public void capitalsSelected(@Observes CapitalsSelected event) {
+        List<Capital> selectedCapitals = event.getSelectedCapitals();
+        pickList.updateSelectedCapitals(selectedCapitals);
+    }
 
-        List<LIElement> list = new ArrayList<LIElement>();
-        for (Capital capital : capitals) {
-            LIElement li = document.createLIElement();
-            li.setInnerText(capital.getName());
-            li.setAttribute("data-key", capital.getName());
-            list.add(li);
-        }
-        return list;
+    private void submit() {
+        List<Capital> capitals = pickList.getSelectedCapitals();
+        event.fire(new CapitalsSelected(capitals));
     }
 }
