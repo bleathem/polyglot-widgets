@@ -1,19 +1,18 @@
-helloworld-errai: Hello World Using the Errai Framework
+
+
+
+The significant achievement here is a single application written in multiple languages/frameworks with a uniform L&F.
+Polyglot-widgets: Components for a polyglot world!
 =======================================================
-Author: Jonathon Fuerth
-Level: Beginner
-Technologies: Errai, JAX-RS, GWT
-Summary: Helloworld using the Errai framework
-Target Product: WFK
+Author: Brian Leathem
+Technologies: JSF, RichFaces, Push, Errai, CDI, GWT
+Summary: Demo of the PickList demo used in multiple frameworks
 
 What is it?
 -----------
 
-This example demonstrates the use of *CDI 1.0* and *JAX-RS* in *JBoss Enterprise Application Platform 6* or *JBoss AS 7* with a GWT front-end client.
+A demo application demonstrating the use of RichFaces standalone widgets to create a "polyglot" application using both RichFaces/JSF, Errai/GWT, and HTML/REST.
 
-GWT is basically a typesafe, statically checked programming model for producing HTML5+CSS3+JavaScript front-ends. In this example, we use RESTful services on the backend. The client communicates with the backend using stubs that are generated based on the JAX-RS resources when the application is compiled.
-
-You can test the REST endpoint at the URL http://localhost:8080/jboss-as-helloworld-errai/hello/json/David
 
 System requirements
 -------------------
@@ -26,7 +25,7 @@ The application this project produces is designed to be run on JBoss Enterprise 
 Configure Maven
 ---------------
 
-If you have not yet done so, you must [Configure Maven](../README.md#mavenconfiguration) before testing the quickstarts.
+If you have not yet done so, you must [Configure Maven](../README.md#mavenconfiguration) before running this demo.
 
 
 Start JBoss Enterprise Application Platform 6 or JBoss AS 7 with the Web Profile
@@ -50,13 +49,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-helloworld-errai.war` to the running instance of the server.
+4. This will deploy `target/polyglot-widgets.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL:  <http://localhost:8080/jboss-as-helloworld-errai/>.
+The application will be running at the following URL:  <http://localhost:8080/polyglot-widgets/>.
 
 
 Undeploy the Archive
@@ -75,7 +74,7 @@ Run the Application in GWT Dev Mode
 GWT Dev Mode provides an edit-save-refresh development experience. If you plan to modify this demo, we recommend you start the application in Dev Mode so you don't have to repackage the entire application every time you change it.
 
 1. Deploy the WAR file and start the JBoss Server as described above.
-2. Open a command line and navigate to the helloworld-errai quickstart directory
+2. Open a command line and navigate to the polyglot-widgets directory
 3. Execute the following command:
 
         mvn gwt:run
