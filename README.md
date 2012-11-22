@@ -1,7 +1,9 @@
 Polyglot-widgets: Components for a polyglot world!
 =======================================================
 Author: Brian Leathem
+
 Technologies: JSF, RichFaces, Push, Errai, CDI, GWT
+
 Summary: Demo of the PickList demo used in multiple frameworks
 
 What is it?
