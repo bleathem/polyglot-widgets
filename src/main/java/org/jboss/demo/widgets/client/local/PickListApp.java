@@ -20,9 +20,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
-import org.jboss.demo.widgets.client.shared.Capital;
-import org.jboss.demo.widgets.client.shared.CapitalsListService;
-import org.jboss.demo.widgets.client.shared.CapitalsSelected;
+import org.jboss.demo.widgets.client.shared.*;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
@@ -40,7 +38,7 @@ import java.util.List;
 public class PickListApp {
     private PickListWidget pickList;
 
-    @Inject
+    @Inject @GWT @Client
     private Event<CapitalsSelected> event;
 
     public PickListApp() {
@@ -72,7 +70,7 @@ public class PickListApp {
         }, CapitalsListService.class).getCapitals();
     }
 
-    public void capitalsSelected(@Observes CapitalsSelected event) {
+    public void capitalsSelected(@Observes @Server @GWT ServerCapitalsSelected event) {
         List<Capital> selectedCapitals = event.getSelectedCapitals();
         pickList.updateSelectedCapitals(selectedCapitals);
     }

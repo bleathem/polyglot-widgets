@@ -39,6 +39,9 @@
                             <f:converter binding="#{capitalsConverter}" />
                         </b:pickList>
                         <a4j:commandButton value="Submit" execute="testExec picklist" render="picklist testRend" />
+                        <a4j:push address="capitalsSelected">
+                            <a4j:ajax render="picklist" event="dataavailable" />
+                        </a4j:push>
                     </h:form>
                 </b:gridColumn>
             </b:gridRow>

@@ -1,12 +1,12 @@
 package org.jboss.demo.widgets.server;
 
-import org.jboss.demo.widgets.client.shared.Capital;
-import org.jboss.demo.widgets.client.shared.CapitalsListService;
-import org.jboss.demo.widgets.client.shared.CapitalsSelected;
+import org.jboss.demo.widgets.client.shared.*;
 import org.jboss.errai.bus.server.annotations.Service;
+import org.richfaces.cdi.push.Push;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,6 +22,12 @@ public class CapitalsBean  implements CapitalsListService, Serializable {
     @Inject
     private List<Capital> capitals;
     private List<Capital> selectedCapitals;
+
+    @Inject @GWT @Server
+    private Event<ServerCapitalsSelected> gwtEvent;
+
+    @Inject @Push(topic = "capitalsSelected")
+    Event<String> jsfEvent;
 
     @PostConstruct
     public void init() {
@@ -39,9 +45,11 @@ public class CapitalsBean  implements CapitalsListService, Serializable {
 
     public void setSelectedCapitals(List<Capital> selectedCapitals) {
         this.selectedCapitals = selectedCapitals;
+        gwtEvent.fire(new ServerCapitalsSelected(selectedCapitals));
     }
 
-    public void observeCapitalSelection(@Observes CapitalsSelected event) {
-        setSelectedCapitals(event.getSelectedCapitals());
+    public void observeCapitalSelection(@Observes @GWT @Client CapitalsSelected capitalsSelected) {
+        this.selectedCapitals = capitalsSelected.getSelectedCapitals();
+        jsfEvent.fire("capitalsSelected");
     }
 }
