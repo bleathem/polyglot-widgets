@@ -112,6 +112,7 @@ public class PickListWidget extends Widget {
             }
         }
         // put the non-selected list elements back in the sourceList in the original order
+        iterator = liElements.iterator();
         for (Capital capital : capitals) {
             if (! selectedCapitals.contains(capital)) {
                 while (iterator.hasNext()) {
