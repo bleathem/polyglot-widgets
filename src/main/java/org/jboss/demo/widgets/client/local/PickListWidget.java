@@ -100,8 +100,8 @@ public class PickListWidget extends Widget {
         clearChildren(sourceList);
         clearChildren(targetList);
         // put the selected list elements back in the targetList in the selected order
-        Iterator<LIElement> iterator = liElements.iterator();
         for (Capital capital : selectedCapitals) {
+            Iterator<LIElement> iterator = liElements.iterator();
             while (iterator.hasNext()) {
                 LIElement li = iterator.next();
                 if (capital.equals(getCapital(li))) {
@@ -112,9 +112,9 @@ public class PickListWidget extends Widget {
             }
         }
         // put the non-selected list elements back in the sourceList in the original order
-        iterator = liElements.iterator();
         for (Capital capital : capitals) {
             if (! selectedCapitals.contains(capital)) {
+                Iterator<LIElement> iterator = liElements.iterator();
                 while (iterator.hasNext()) {
                     LIElement li = iterator.next();
                     if (capital.equals(getCapital(li))) {

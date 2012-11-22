@@ -3,7 +3,6 @@ package org.jboss.demo.widgets.client.shared;
 import org.jboss.errai.common.client.api.annotations.Portable;
 import org.jboss.errai.marshalling.client.api.annotations.MapsTo;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
 /**
@@ -13,28 +12,12 @@ import java.io.Serializable;
  */
 @Portable
 public class Capital implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = -1042449580199397136L;
+    private static final long serialVersionUID = 1L;
     private static final String FILE_EXT = ".gif";
     private String name;
     private String state;
     private String timeZone;
 
-    public Capital() {
-    }
-
-    public Capital(
-            @MapsTo("name") String name,
-            @MapsTo("state") String state,
-            @MapsTo("timeZone") String timeZone) {
-        this.name = name;
-        this.state = state;
-        this.timeZone = timeZone;
-    }
-
-    @XmlElement
     public String getName() {
         return name;
     }
@@ -43,7 +26,6 @@ public class Capital implements Serializable {
         this.name = name;
     }
 
-    @XmlElement
     public String getState() {
         return state;
     }
@@ -60,7 +42,6 @@ public class Capital implements Serializable {
         return stateNameToFileName() + FILE_EXT;
     }
 
-    @XmlElement
     public String getTimeZone() {
         return timeZone;
     }

@@ -24,6 +24,7 @@ import org.jboss.demo.widgets.client.shared.*;
 import org.jboss.errai.bus.client.api.RemoteCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.ioc.client.api.AfterInitialization;
+import org.jboss.errai.ioc.client.api.Caller;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
 import javax.enterprise.event.Event;
@@ -41,12 +42,15 @@ public class PickListApp {
     @Inject @Client
     private Event<CapitalsSelected> event;
 
+    @Inject
+    Caller<CapitalsListService> rpcCaller;
+
     public PickListApp() {
         pickList = new PickListWidget();
 
         Button button = new Button("Submit");
-        button.removeStyleName("gwt-button");
-        button.getElement().addClassName("button");
+        button.removeStyleName("gwt-Button");
+        button.getElement().addClassName("btn");
         button.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
@@ -60,16 +64,16 @@ public class PickListApp {
 
     @AfterInitialization
     public void remoteCall() {
-        MessageBuilder.createCall(new RemoteCallback<List<Capital>>() {
+        rpcCaller.call(new RemoteCallback<List<Capital>>() {
             public void callback(final List<Capital> capitals) {
-                MessageBuilder.createCall(new RemoteCallback<List<Capital>>() {
+                rpcCaller.call(new RemoteCallback<List<Capital>>() {
                     public void callback(final List<Capital> selectedCapitals) {
                         pickList.initCapitals(capitals, selectedCapitals);
                     }
-                }, CapitalsListService.class).getSelectedCapitals();
+                }).getSelectedCapitals();
 
             }
-        }, CapitalsListService.class).getCapitals();
+        }).getCapitals();
     }
 
     public void capitalsSelected(@Observes @Server CapitalsSelected event) {
