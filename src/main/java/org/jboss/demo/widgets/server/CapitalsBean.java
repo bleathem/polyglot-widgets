@@ -23,11 +23,11 @@ public class CapitalsBean  implements CapitalsListService, Serializable {
     private List<Capital> capitals;
     private List<Capital> selectedCapitals;
 
-    @Inject @GWT @Server
-    private Event<ServerCapitalsSelected> gwtEvent;
+    @Inject @Server
+    private Event<CapitalsSelected> gwtEvent;
 
     @Inject @Push(topic = "capitalsSelected")
-    Event<String> jsfEvent;
+    private Event<String> jsfEvent;
 
     @PostConstruct
     public void init() {
@@ -45,10 +45,10 @@ public class CapitalsBean  implements CapitalsListService, Serializable {
 
     public void setSelectedCapitals(List<Capital> selectedCapitals) {
         this.selectedCapitals = selectedCapitals;
-        gwtEvent.fire(new ServerCapitalsSelected(selectedCapitals));
+        gwtEvent.fire(new CapitalsSelected(selectedCapitals));
     }
 
-    public void observeCapitalSelection(@Observes @GWT @Client CapitalsSelected capitalsSelected) {
+    public void observeCapitalSelection(@Observes @Client CapitalsSelected capitalsSelected) {
         this.selectedCapitals = capitalsSelected.getSelectedCapitals();
         jsfEvent.fire("capitalsSelected");
     }

@@ -57,14 +57,8 @@ public class PickListWidget extends Widget {
         panel.appendChild(targetList);
     }
 
-    public PickListWidget initCapitals(List<Capital> capitals, List<Capital> selectedCapitals) {
+    public void initCapitals(List<Capital> capitals, List<Capital> selectedCapitals) {
         this.capitals = capitals;
-        parseCapitals(selectedCapitals);
-        initPlugin();
-        return this;
-    }
-
-    public PickListWidget parseCapitals(List<Capital> selectedCapitals) {
         clearChildren(sourceList);
         clearChildren(targetList);
 
@@ -80,11 +74,43 @@ public class PickListWidget extends Widget {
                 sourceList.appendChild(li);
             }
         }
-        return this;
+
+        initPlugin();
     }
 
-    public PickListWidget updateSelectedCapitals(List<Capital> selectedCapitals) {
-        return this; //parseCapitals(selectedCapitals);
+    public void updateSelectedCapitals(List<Capital> selectedCapitals) {
+        List<LIElement> liElements = new ArrayList<LIElement>();
+        for (int i = 0; i < sourceList.getChildCount(); i++ ) {
+            Node node = sourceList.getChild(i);
+            if (node instanceof LIElement) {
+                liElements.add((LIElement) node);
+            }
+        }
+        for (int i = 0; i < targetList.getChildCount(); i++ ) {
+            Node node = targetList.getChild(i);
+            if (node instanceof LIElement) {
+                liElements.add((LIElement) node);
+            }
+        }
+        clearChildren(sourceList);
+        clearChildren(targetList);
+        for (Capital capital : selectedCapitals) {
+            for (LIElement li : liElements) {
+                if (capital.equals(getCapital(li))) {
+                    targetList.appendChild(li);
+                }
+            }
+        }
+        for (Capital capital : capitals) {
+            if (! selectedCapitals.contains(capital)) {
+                for (LIElement li : liElements) {
+                    if (capital.equals(getCapital(li))) {
+                        sourceList.appendChild(li);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public List<Capital> getSelectedCapitals() {

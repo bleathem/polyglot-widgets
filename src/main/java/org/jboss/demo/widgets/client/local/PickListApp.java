@@ -38,7 +38,7 @@ import java.util.List;
 public class PickListApp {
     private PickListWidget pickList;
 
-    @Inject @GWT @Client
+    @Inject @Client
     private Event<CapitalsSelected> event;
 
     public PickListApp() {
@@ -70,7 +70,7 @@ public class PickListApp {
         }, CapitalsListService.class).getCapitals();
     }
 
-    public void capitalsSelected(@Observes @Server @GWT ServerCapitalsSelected event) {
+    public void capitalsSelected(@Observes @Server CapitalsSelected event) {
         List<Capital> selectedCapitals = event.getSelectedCapitals();
         pickList.updateSelectedCapitals(selectedCapitals);
     }

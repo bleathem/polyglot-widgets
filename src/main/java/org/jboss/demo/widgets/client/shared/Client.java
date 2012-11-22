@@ -22,11 +22,14 @@
 package org.jboss.demo.widgets.client.shared;
 
 import javax.inject.Qualifier;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
 @Qualifier
+@Retention(value = RetentionPolicy.RUNTIME)
 public @interface Client {
 
 }
