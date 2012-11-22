@@ -1,7 +1,3 @@
-
-
-
-The significant achievement here is a single application written in multiple languages/frameworks with a uniform L&F.
 Polyglot-widgets: Components for a polyglot world!
 =======================================================
 Author: Brian Leathem
@@ -13,6 +9,7 @@ What is it?
 
 A demo application demonstrating the use of RichFaces standalone widgets to create a "polyglot" application using both RichFaces/JSF, Errai/GWT, and HTML/REST.
 
+The significant achievement here is a single application written in multiple languages/frameworks with a uniform L&F.
 
 System requirements
 -------------------
