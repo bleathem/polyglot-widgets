@@ -4,7 +4,7 @@ Author: Brian Leathem
 
 Technologies: JSF, RichFaces, Push, Errai, CDI, GWT
 
-Summary: Demo of the PickList demo used in multiple frameworks
+Summary: Demo of the PickList javascript widget used in multiple frameworks
 
 What is it?
 -----------
