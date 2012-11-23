@@ -18,91 +18,78 @@ limitations under the License.
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Errai/GWT | Polyglot Widgets</title>
-    <script type="text/javascript" src="HelloWorldApp/HelloWorldApp.nocache.js"></script>
-    <script type="text/javascript">erraiJaxRsApplicationRoot = 'hello'</script>
 
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/jquery.js.jsf"></script>
-    <link type="text/css" rel="stylesheet" href="/polyglot-widgets/javax.faces.resource/min/rf-bootstrap-responsive.css.jsf?ln=org.richfaces"/>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/min/rf-bootstrap-js.js.jsf?ln=org.richfaces"></script>
-    <link type="text/css" rel="stylesheet" href="/polyglot-widgets/javax.faces.resource/prettify.css.jsf?ln=com.googlecode/prettify"/>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/prettify.js.jsf?ln=com.googlecode/prettify"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/codeblock.js.jsf?ln=org.richfaces"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/js/jquery.ui.position.js.jsf?ln=com.jqueryui"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/js/jquery.ui.core.js.jsf?ln=com.jqueryui"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/js/jquery.ui.widget.js.jsf?ln=com.jqueryui"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/js/jquery.ui.mouse.js.jsf?ln=com.jqueryui"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/js/jquery.ui.button.js.jsf?ln=com.jqueryui"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/js/jquery.ui.selectable.js.jsf?ln=com.jqueryui"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/js/jquery.ui.sortable.js.jsf?ln=com.jqueryui"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/widget/pickList.js.jsf?ln=org.richfaces"></script>
-    <script type="text/javascript" src="/polyglot-widgets/javax.faces.resource/widget/orderingList.js.jsf?ln=org.richfaces"></script>
+    <script type="text/javascript" src="javax.faces.resource/jquery.js.jsf"></script>
+    <link type="text/css" rel="stylesheet" href="javax.faces.resource/min/rf-bootstrap-responsive.css.jsf?ln=org.richfaces"/>
+    <script type="text/javascript" src="javax.faces.resource/min/rf-bootstrap-js.js.jsf?ln=org.richfaces"></script>
+    <link type="text/css" rel="stylesheet" href="javax.faces.resource/prettify.css.jsf?ln=com.googlecode/prettify"/>
+    <script type="text/javascript" src="javax.faces.resource/prettify.js.jsf?ln=com.googlecode/prettify"></script>
+    <script type="text/javascript" src="javax.faces.resource/codeblock.js.jsf?ln=org.richfaces"></script>
+    <script type="text/javascript" src="javax.faces.resource/js/jquery.ui.position.js.jsf?ln=com.jqueryui"></script>
+    <script type="text/javascript" src="javax.faces.resource/js/jquery.ui.core.js.jsf?ln=com.jqueryui"></script>
+    <script type="text/javascript" src="javax.faces.resource/js/jquery.ui.widget.js.jsf?ln=com.jqueryui"></script>
+    <script type="text/javascript" src="javax.faces.resource/js/jquery.ui.mouse.js.jsf?ln=com.jqueryui"></script>
+    <script type="text/javascript" src="javax.faces.resource/js/jquery.ui.button.js.jsf?ln=com.jqueryui"></script>
+    <script type="text/javascript" src="javax.faces.resource/js/jquery.ui.selectable.js.jsf?ln=com.jqueryui"></script>
+    <script type="text/javascript" src="javax.faces.resource/js/jquery.ui.sortable.js.jsf?ln=com.jqueryui"></script>
+    <script type="text/javascript" src="javax.faces.resource/widget/pickList.js.jsf?ln=org.richfaces"></script>
+    <script type="text/javascript" src="javax.faces.resource/widget/orderingList.js.jsf?ln=org.richfaces"></script>
+
+    <script type="text/javascript" src="html5-bootstrap.js"></script>
 </head>
 
 <body>
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container">
-            <a class="btn btn-inverse btn-navbar" data-target="#j_idt6_collapse" data-toggle="collapse"><span
+            <a class="btn btn-inverse btn-navbar" data-target="#collapse" data-toggle="collapse"><span
                     class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
-            <a href="/polyglot-widgets/index.jsf" class="brand">Polyglot widgets</a>
+            <a href="index.jsf" class="brand">Polyglot widgets</a>
 
-            <div id="j_idt6_collapse" class="nav-collapse">
+            <div id="collapse" class="nav-collapse">
                 <ul class="nav">
-                    <li><a href="/polyglot-widgets/richfaces-bootstrap.jsf">RichFaces/JSF example</a></li>
-                    <li><a href="/polyglot-widgets/gwt-bootstrap.html">Errai/GWT example</a></li>
+                    <li><a href="richfaces-bootstrap.jsf">RichFaces/JSF example</a></li>
+                    <li><a href="gwt-bootstrap.html">Errai/GWT example</a></li>
+                    <li><a href="html5-bootstrap.html">HTML 5/Aerogear</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<div class="container " id="j_idt11">
-    <div class="row " id="j_idt12">
-        <div class="span12  " id="j_idt13">
-            <div class="hero-unit " id="j_idt14">
-                <h1>Components for a polyglot world!</h1>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <div class="hero-unit">
+                <h1>Components for HTML5/Aerogear!</h1>
 
-                <p>Errai/GWT standalone javascript widgets can be used with any web framework</p>
+                <p>The RichFaces standalone javascript widgets used with HTML5/Aerogear</p>
             </div>
         </div>
     </div>
-    <div class="row " id="j_idt16">
-        <div class="span5  " id="j_idt17">
-            Here we have a JSF Facelet snippet built using the RichFaces &quot;pickList&quot; Bootstrap component that
-            wraps the standalone &quot;pickList.js&quot; widget as a JSF component.
-                    <pre class="prettyprint linenums lang-html" id="j_idt19">
-                        Some sample code
-                    </pre>
-        </div>
-        <div class="span7  " id="j_idt22">
-            <div id="j_idt23">
-                <ol class="source" id="j_idt23SourceList">
-                    <li data-key="Montgomery">Montgomery</li>
-                    <li data-key="Juneau">Juneau</li>
-                    <li data-key="Phoenix">Phoenix</li>
-                    <li data-key="Little Rock">Little Rock</li>
-                    <li data-key="Sacramento">Sacramento</li>
-                    <li data-key="Denver">Denver</li>
-                    <li data-key="Hartford">Hartford</li>
-                    <li data-key="Dover">Dover</li>
-                    <li data-key="Tallahassee">Tallahassee</li>
-                    <li data-key="Atlanta">Atlanta</li>
-                    <li data-key="Honolulu">Honolulu</li>
-                    <li data-key="Boise">Boise</li>
-                </ol>
-                <ol class="target" id="j_idt23TargetList"></ol>
-            </div>
-            <script type="text/javascript">jQuery(function () {
-                var $pickList = $(document.getElementById('j_idt23'));
+    <div class="row">
+        <div class="span5">
+            <p>
+                Here we have a HTML5 Widget built using the standalone RichFaces Bootstrap &quot;pickList&quot; javascript
+                widget, used to select/sort items from a list.
+            </p>
+            <p>
+                The pgae's javascript interacts directly  with the pickList jQuery plugin:
+            </p>
+            <pre class="prettyprint linenums lang-html">jQuery(function () {
+    var $pickList = $(document.getElementById('myPickList'));
                 $pickList.pickList();
-            });</script>
+            });
+            </pre>
+        </div>
+        <div class="span7">
+            <div id="myPickList">
+                <ol class="source"></ol>
+                <ol class="target"></ol>
+            </div>
+            <button disabled="true" class="btn btn-warning">Submit - disabled</button>
         </div>
     </div>
 </div>
 </body>
 
-</html>
-
-
-<body>
-</body>
 </html>

@@ -10,6 +10,7 @@
 
             <h:link outcome="/richfaces-bootstrap" value="RichFaces/JSF example"/>
             <h:outputLink value="#{request.contextPath}/gwt-bootstrap.html">Errai/GWT example</h:outputLink>
+            <h:outputLink value="#{request.contextPath}/html5-bootstrap.html">HTML5/Aerogear example</h:outputLink>
         </b:navbar>
         <b:gridContainer>
             <b:gridRow>
@@ -40,8 +41,10 @@
                     </h:outputLink>
                 </b:gridColumn>
                 <b:gridColumn span="4">
-                    <p>HTML5 Demo:</p>
-                    [screenshot]
+                    <h:outputLink value="#{request.contextPath}/html5-bootstrap.html">
+                        <p>HTML5/Aerogear Demo:</p>
+                        [screenshot]
+                    </h:outputLink>
                 </b:gridColumn>
             </b:gridRow>
         </b:gridContainer>

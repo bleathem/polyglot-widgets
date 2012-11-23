@@ -48,6 +48,11 @@
         <mime-type>application/x-font-woff</mime-type>
     </mime-mapping>
 
+    <servlet-mapping>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <url-pattern>/rs/*</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>ErraiServlet</servlet-name>
         <servlet-class>org.jboss.errai.bus.server.servlet.DefaultBlockingServlet</servlet-class>
