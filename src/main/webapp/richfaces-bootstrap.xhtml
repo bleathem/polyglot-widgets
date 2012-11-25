@@ -33,14 +33,19 @@
                         The RichFaces Bootstrap Sandbox project wraps the jQuery plugin as a JSF component, and is used
                         in your JSF applications via the facelet syntax:
                     </p>
-                    <b:codeblock styleClass="lang-html">&lt;b:pickList id=&quot;picklist&quot; value=&quot;\#{capitalsBean.selectedCapitals}&quot; orderable=&quot;true&quot;&gt;<br/>    &lt;f:selectItems value=&quot;\#{capitals}&quot; var=&quot;capital&quot; itemValue=&quot;\#{capital}&quot; itemLabel=&quot;\#{capital.name}&quot; /&gt;<br/>    &lt;f:converter binding=&quot;\#{capitalsConverter}&quot; /&gt;<br/>&lt;/b:pickList&gt;</b:codeblock>
+                    <b:codeblock styleClass="lang-html">&lt;b:pickList id=&quot;picklist&quot;<br/>     orderable=&quot;true&quot;<br/>         value=&quot;\#{capitalsBean.selectedCapitals}&quot;&gt;<br/>    &lt;f:selectItems var=&quot;capital&quot;<br/>                 value=&quot;\#{capitals}&quot;<br/>             itemValue=&quot;\#{capital}&quot;<br/>             itemLabel=&quot;\#{capital.name}&quot; /&gt;<br/>    &lt;f:converter binding=&quot;\#{capitalsConverter}&quot; /&gt;<br/>&lt;/b:pickList&gt;</b:codeblock>
                 </b:gridColumn>
-                <b:gridColumn span="7">
-                    <h:form id="form">
-                        <b:pickList id="picklist" value="#{capitalsBean.selectedCapitals}" orderable="true">
-                            <f:selectItems value="#{capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
-                            <f:converter binding="#{capitalsConverter}" />
-                        </b:pickList>
+                    <b:gridColumn span="7">
+                        <h:form id="form">
+                            <b:pickList id="picklist"
+                                 orderable="true"
+                                     value="#{capitalsBean.selectedCapitals}">
+                                <f:selectItems var="capital"
+                                             value="#{capitals}"
+                                         itemValue="#{capital}"
+                                         itemLabel="#{capital.name}" />
+                                <f:converter binding="#{capitalsConverter}" />
+                            </b:pickList>
                         <b:commandButton value="Submit" execute="testExec picklist" render="picklist testRend" />
                         <a4j:push address="capitalsSelected">
                             <a4j:ajax render="picklist" event="dataavailable" />

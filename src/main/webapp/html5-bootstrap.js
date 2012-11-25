@@ -45,8 +45,7 @@ $(function () {
     }
 
     var initPickList = function () {
-        var $pickList = $(document.getElementById('myPickList'));
-        $pickList.pickList();
+        $('#myPickList').pickList();
     }
 
     var submit = function () {
