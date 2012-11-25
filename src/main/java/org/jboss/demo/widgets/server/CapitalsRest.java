@@ -23,11 +23,15 @@ package org.jboss.demo.widgets.server;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.jboss.demo.widgets.client.shared.Capital;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
@@ -39,7 +43,7 @@ public class CapitalsRest {
 
     @GET
     @Path("all")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public String getCapitals() {
         JSONArray json = JSONArray.fromObject(capitalsBean.getCapitals());
         return json.toString();
@@ -47,9 +51,38 @@ public class CapitalsRest {
 
     @GET
     @Path("selected")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public String getSelectedCapitals() {
         JSONArray json = JSONArray.fromObject(capitalsBean.getSelectedCapitals());
         return json.toString();
     }
+
+    @GET
+    @Path("selected")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String setSelectedCapitals() {
+        JSONArray json = JSONArray.fromObject(capitalsBean.getSelectedCapitals());
+        return json.toString();
+    }
+
+    @POST
+    @Path("selected")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response setCapitals(List<Capital> capitals) {
+
+        Response.ResponseBuilder builder = null;
+
+        try {
+            capitalsBean.setSelectedCapitals(capitals);
+            builder = Response.ok();
+        } catch (Exception e) {
+            // Handle generic exceptions
+            Map<String, String> responseObj = new HashMap<String, String>();
+            responseObj.put("error", e.getMessage());
+            builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
+        }
+        return builder.build();
+    }
+
 }

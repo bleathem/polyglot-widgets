@@ -42,6 +42,10 @@ public class Capital implements Serializable {
         return stateNameToFileName() + FILE_EXT;
     }
 
+    public void setStateFlag(String stateFlag) {
+        // no-op, present for JSON de-marshaling
+    }
+
     public String getTimeZone() {
         return timeZone;
     }
