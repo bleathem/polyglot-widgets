@@ -14,9 +14,6 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
     <display-name>Bootstrap Demo</display-name>
-    <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
-    </welcome-file-list>
     <context-param>
         <param-name>org.richfaces.enableControlSkinning</param-name>
         <param-value>false</param-value>
@@ -79,7 +76,4 @@
         <param-value>/WEB-INF/users.properties</param-value>
     </context-param>
 
-    <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
-    </welcome-file-list>
 </web-app>
