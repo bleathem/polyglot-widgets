@@ -1,0 +1,6 @@
+<atmosphere-handlers>
+    <atmosphere-handler
+            context-root="/subscribe/*"
+            class-name="org.jboss.demo.widgets.server.AtmosphereHandler">
+    </atmosphere-handler>
+</atmosphere-handlers>

@@ -1,5 +1,7 @@
 $(function () {
 
+    var allCapitals;
+
     var bootstrap = function () {
         fetchCapitals();
         $('#submit').click(submit);
@@ -29,6 +31,7 @@ $(function () {
     }
 
     var populatePickList = function (capitals, selectedCapitals) {
+        allCapitals = capitals;
         var sourceList = $('#myPickList .source')
         var targetList = $('#myPickList .target')
         $.each(selectedCapitals, function (index, capital) {
@@ -41,6 +44,33 @@ $(function () {
         });
         $.each(unselectedCapitals, function (index, capital) {
             sourceList.append($("<li/>").data('key', capital.name).data('object', capital).text(capital.name));
+        });
+    }
+
+    var updatePickList = function (selectedCapitals) {
+        // retrieve the list elements from the targetList
+        var sourceList = $('#myPickList .source');
+        var targetList = $('#myPickList .target');
+        var tempList = $("<ol />");
+        tempList.append(sourceList.find('li').detach());
+        tempList.append(targetList.find('li').detach());
+
+        // put the selected list elements back in the targetList in the selected order
+        $.each(selectedCapitals, function(index, capital) {
+            var listElement = $.grep(tempList.find('li'), function (li) {
+                return $(li).data('object').name === capital.name;
+            });
+            targetList.append($(listElement).detach());
+        });
+
+        // put the non-selected list elements back in the sourceList in the original order
+        $.each(allCapitals, function(index, capital) {
+            var listElement = $.grep(tempList.find('li'), function (li) {
+                return $(li).data('object').name === capital.name;
+            });
+            if (listElement.length > 0) {
+                sourceList.append($(listElement).detach());
+            }
         });
     }
 
@@ -68,6 +98,36 @@ $(function () {
                 });
             });
     }
-        bootstrap();
 
-});
+    var subscribe = function () {
+        var request = { url:'subscribe/selectedCapitals',
+            contentType:"application/json",
+            logLevel:'debug',
+            transport:'long-polling',
+            onMessage:function (response) {
+                console.log(response.responseBody);
+                var selectedCapitals = JSON.parse(response.responseBody);
+                updatePickList(selectedCapitals);
+
+            },
+            onOpen:function (response) {
+                console.log('Atmosphere connected using ' + response.transport);
+            },
+            onReconnect:function (request, response) {
+                console.log("reconnecting");
+            },
+            onError: function(response) {
+                console.log("socket or server problem")
+            }
+        };
+
+        var socket = $.atmosphere;
+        var subSocket = socket.subscribe(request);
+
+    }
+
+    bootstrap();
+    subscribe();
+
+})
+;

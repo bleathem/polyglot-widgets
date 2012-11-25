@@ -22,7 +22,6 @@
 package org.jboss.demo.widgets.server;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.jboss.demo.widgets.client.shared.Capital;
 
 import javax.inject.Inject;
@@ -84,5 +83,4 @@ public class CapitalsRest {
         }
         return builder.build();
     }
-
 }
