@@ -69,9 +69,7 @@ public class CapitalsRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response setCapitals(List<Capital> capitals) {
-
         Response.ResponseBuilder builder = null;
-
         try {
             capitalsBean.setSelectedCapitals(capitals);
             builder = Response.ok();

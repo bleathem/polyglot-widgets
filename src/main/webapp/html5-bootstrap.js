@@ -20,6 +20,7 @@ $(function () {
                         console.log("success, selectedCapitals: " + selectedCapitals);
                         populatePickList(capitals, selectedCapitals);
                         initPickList();
+                        subscribe();
                     }
                 }).error(function () {
                         console.log("error retrieving all capitals");
@@ -127,7 +128,6 @@ $(function () {
     }
 
     bootstrap();
-    subscribe();
 
 })
 ;
