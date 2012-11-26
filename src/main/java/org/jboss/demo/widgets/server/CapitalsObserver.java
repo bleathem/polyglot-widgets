@@ -49,10 +49,8 @@ public class CapitalsObserver {
     }
 
     public void observeCapitalSelectionServerEvent(@Observes @Server CapitalsSelected capitalsSelected) {
-        if (FacesContext.getCurrentInstance() != null) {
-            jsfEvent.fire("capitalsSelected");
-        }
         broadcastRest(capitalsSelected.getSelectedCapitals());
+        jsfEvent.fire("capitalsSelected");
     }
 
     public void broadcastRest(final List<Capital> selectedCapitals) {
