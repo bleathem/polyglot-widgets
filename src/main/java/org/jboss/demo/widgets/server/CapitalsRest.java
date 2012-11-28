@@ -42,18 +42,17 @@ public class CapitalsRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCapitals(@DefaultValue("all") @QueryParam("filter") String filter) {
+    public List<Capital> getCapitals(@DefaultValue("all") @QueryParam("filter") String filter) {
         List<Capital> capitals;
         if ("selected".equals(filter)) {
             capitals = capitalsBean.getSelectedCapitals();
         } else {
             capitals = capitalsBean.getCapitals();
         }
-        JSONArray json = JSONArray.fromObject(capitals);
-        return json.toString();
+        return capitals;
     }
 
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response setCapitals(List<Capital> capitals) {

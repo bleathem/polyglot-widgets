@@ -5,29 +5,36 @@ $(function () {
         $('#submit').click(submit);
     }
 
+    var capitalsPipe = AeroGear.Pipeline({
+        name:"capitals",
+        settings:{
+            baseURL:'/rs/'
+        }
+    }).pipes['capitals'];
+
     var fetchCapitals = function () {
-        $.ajax('rs/capitals', {
-            dataType:'json',
-            type:'GET',
+        capitalsPipe.read({
             success:function (capitals) {
                 log("success, capitals: " + capitals);
-                $.ajax('rs/capitals?filter=selected', {
-                    dataType:'json',
-                    type:'GET',
+                capitalsPipe.read({
+                    query:{filter:'selected'},
                     success:function (selectedCapitals) {
                         log("success, selectedCapitals: " + selectedCapitals);
                         initPickList();
                         $('#myPickList').pickListGlue("populatePickList", capitals, selectedCapitals);
                         subscribe();
+                    },
+                    error:function () {
+                        log("Error: retrieving selected capitals");
                     }
-                }).error(function () {
-                        log("error retrieving all capitals");
-                    });
+                });
+            },
+            error:function () {
+                log("Error: retrieving all capitals");
             }
-        }).error(function () {
-                log("error retrieving all capitals");
-            });
-    }
+        });
+    };
+
 
     var initPickList = function () {
         $('#myPickList').pickList();
@@ -37,20 +44,17 @@ $(function () {
     var submit = function () {
         var selectedCapitals = $('#myPickList').pickListGlue("getSelectedItems");
 
-        $.ajax('rs/capitals', {
-            contentType:"application/json",
-            dataType:'json',
-            type:'PUT',
-            data:JSON.stringify(selectedCapitals),
-            success:function (data) {
-                log("Ajax capital post success");
+        capitalsPipe.save(
+            selectedCapitals,
+            {
+                success:function () {
+                    log("Success: submitting selected capitals ");
+                },
+                error: function () {
+                    log("Error: submitting selected capitals");
+                }
             }
-        }).error(function (error) {
-                var errorMessage = $.parseJSON(error.responseText);
-                $.each(errorMessage, function (index, message) {
-                    log("Ajax capital post error: " + message);
-                });
-            });
+        );
     }
 
     var subscribe = function () {
@@ -69,7 +73,7 @@ $(function () {
             onReconnect:function (request, response) {
                 log("reconnecting");
             },
-            onError: function(response) {
+            onError:function (response) {
                 log("socket or server problem")
             }
         };

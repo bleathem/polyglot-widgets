@@ -26,6 +26,7 @@ import org.jboss.demo.widgets.client.shared.Capital;
 import org.jboss.demo.widgets.client.shared.CapitalsSelected;
 import org.jboss.demo.widgets.client.shared.Client;
 import org.jboss.demo.widgets.client.shared.Server;
+import org.richfaces.application.push.PushContextInitializationException;
 import org.richfaces.cdi.push.Push;
 
 import javax.enterprise.event.Event;
@@ -50,7 +51,11 @@ public class CapitalsObserver {
 
     public void observeCapitalSelectionServerEvent(@Observes @Server CapitalsSelected capitalsSelected) {
         broadcastRest(capitalsSelected.getSelectedCapitals());
-        jsfEvent.fire("capitalsSelected");
+        try {
+            jsfEvent.fire("capitalsSelected");
+        } catch (PushContextInitializationException e) {
+            // no JSF page has yet been loaded to initialize the RF Push Context
+        }
     }
 
     public void broadcastRest(final List<Capital> selectedCapitals) {
