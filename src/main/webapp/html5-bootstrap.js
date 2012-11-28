@@ -6,12 +6,12 @@ $(function () {
     }
 
     var fetchCapitals = function () {
-        $.ajax('rs/capitals/all', {
+        $.ajax('rs/capitals', {
             dataType:'json',
             type:'GET',
             success:function (capitals) {
                 log("success, capitals: " + capitals);
-                $.ajax('rs/capitals/selected', {
+                $.ajax('rs/capitals?filter=selected', {
                     dataType:'json',
                     type:'GET',
                     success:function (selectedCapitals) {
@@ -37,10 +37,10 @@ $(function () {
     var submit = function () {
         var selectedCapitals = $('#myPickList').pickListGlue("getSelectedItems");
 
-        $.ajax('rs/capitals/selected', {
+        $.ajax('rs/capitals', {
             contentType:"application/json",
             dataType:'json',
-            type:'POST',
+            type:'PUT',
             data:JSON.stringify(selectedCapitals),
             success:function (data) {
                 log("Ajax capital post success");

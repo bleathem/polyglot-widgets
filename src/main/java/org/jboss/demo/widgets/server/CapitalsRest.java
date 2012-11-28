@@ -41,31 +41,19 @@ public class CapitalsRest {
     CapitalsBean capitalsBean;
 
     @GET
-    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCapitals() {
-        JSONArray json = JSONArray.fromObject(capitalsBean.getCapitals());
+    public String getCapitals(@DefaultValue("all") @QueryParam("filter") String filter) {
+        List<Capital> capitals;
+        if ("selected".equals(filter)) {
+            capitals = capitalsBean.getSelectedCapitals();
+        } else {
+            capitals = capitalsBean.getCapitals();
+        }
+        JSONArray json = JSONArray.fromObject(capitals);
         return json.toString();
     }
 
-    @GET
-    @Path("selected")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getSelectedCapitals() {
-        JSONArray json = JSONArray.fromObject(capitalsBean.getSelectedCapitals());
-        return json.toString();
-    }
-
-    @GET
-    @Path("selected")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String setSelectedCapitals() {
-        JSONArray json = JSONArray.fromObject(capitalsBean.getSelectedCapitals());
-        return json.toString();
-    }
-
-    @POST
-    @Path("selected")
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response setCapitals(List<Capital> capitals) {
